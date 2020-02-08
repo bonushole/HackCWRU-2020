@@ -16,13 +16,45 @@ let controller = {
 }
 
 function getDonations(req, res) {
-  if (req.query.monthRange) {
+  if (req.query.monthRange && req.query.candidateRange) {
+    getDonationsRangeCandidateMonth(req, res);
+  } else if (req.query.monthRange) {
     getDonationsRangeMonth(req, res);
   } else if (req.query.candidateRange) {
     getDonationsRangeCandidate(req, res);
   } else {
     getDonationsSingleInstance(req, res);
   }
+}
+
+function getDonationsRangeCandidateMonth(req, res) {
+  const query = {
+    "Date": {"$in": globals.monthList},
+    "Candidate ID": {"$in": globals.mainCandidates},
+    "Donation Type": "IND",
+  }
+  const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
+  client.connect(err => {
+    const collection = client.db("Campaign_Finance").collection("RunningTotals");
+    collection.find(query).toArray(function(err, result) {
+      if (err) throw err;
+      let ret = {};
+      for (let i = 0; i < globals.monthList.length; i++) {
+        let month = globals.monthList[i];
+        ret[month] = {};
+        for (let j = 0; j < globals.mainCandidates.length; j++) {
+          let candidate = globals.mainCandidates[j];
+          ret[month][candidate] = {};
+          for (let k = 0; k < result.length; k++) {
+            let r = result[k];
+            ret[month][candidate][r["zip"]] = r["Amount"];
+          }
+        }
+      }
+      res.send(ret);
+      client.close();
+    });
+  });
 }
 
 function getDonationsRangeCandidate(req, res) {
