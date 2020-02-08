@@ -5,8 +5,23 @@ var sampleDots = [{loc:{lat: 41.850033, lng: -80.6500523}, size:1},
             {loc:{lat: 49.850033, lng: -77.6500523}, size:4}
             ]
 
+/*
+var sampleDots = {loc:{lat: 41.850033, lng: -80.6500523}, size:1},
+            {loc:{lat: 31.850033, lng: -90.6500523}, size:2},
+            {loc:{lat: 51.850033, lng: -87.6500523}, size:3},
+            {loc:{lat: 49.850033, lng: -77.6500523}, size:4}
+            }
+*/
 var map;
-var zipMarkers = [];
+var allZipMarkers = {
+
+  'blue':{},
+  'red':{},
+  'green':{},
+  'yellow':{},
+  'purple':{}
+
+};
 
 var idealBounds = {"south":23.91804631650461,"west":-126.41177104999998,"north":51.20142279408888,"east":-64.88833355};
 
@@ -64,34 +79,40 @@ function changeDots(){
 
 }
 
-function drawSomeDots(dots){
+function initializeZipMarkers(zipsNCoords){
+
+  colors = ['blue','red','green','yellow','purple'];
   
-  for(var i=0; i < dots.length; i++){
-    var marker = new google.maps.Circle({
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#FF0000',
-      fillOpacity: 0.35,
-      center:dots[i].loc,
-      radius:60000*dots[i].size,
-      map: map
-    });
-    zipMarkers.push({
-      marker: marker,
-      srcDot: dots[i]
-    });
+  for(var color in colors){  
+      var marker = new google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        center:dots[i].loc,
+        radius:0,
+        map: map
+       });
+       zipMarkers[val]={
+         marker: marker
+       };
+      
+    allZipMarkers[colors[color]]=zipMarkers;
+     
   }
-  
 }
 
-function updateDots(){
+function updateDots(color, vals){
 
   //console.log(zipMarkers);
-  for(var zipMarker in zipMarkers){
-  
-    zipMarkers[zipMarker].marker.setRadius( 60000*zipMarkers[zipMarker].srcDot.size);
-  
+  var zipMarkers = allZipMarkers[color];
+  for(var val in vals){
+    
+    if(vals.hasOwnProperty(val)){
+      zipMarkers[val].marker.setRadius(60000*val['Amount']);
+    }
+   
   }  
 
 }
