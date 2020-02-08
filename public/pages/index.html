@@ -11,16 +11,16 @@
     <link rel="stylesheet"
       href='https://fonts.googleapis.com/css?family=Varela+Round|Open Sans'>
     <style>
-    
+
     .mapDiv {
 
       height: 400px;
       width: 700px;
       background-color: powderblue;
 
-    
+
     }
-    
+
     .slidecontainer {
         width: 100%;
     }
@@ -99,18 +99,18 @@
     </header>
 
     <div class="slidecontainer">
-      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+      <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
       <p>Day: <span id="demo"></span></p>
     </div>
 
-    <script>
+    <script src="../js/ajaxEngine.js">
+    /*
       var slider = document.getElementById("myRange");
       var output = document.getElementById("demo");
       output.innerHTML = slider.value;
-
       slider.oninput = function() {
         output.innerHTML = this.value;
-      }
+      }*/
     </script>
 
     <section id="showcase">
@@ -144,13 +144,13 @@
         <nav>
         </nav>
     </section>
-    
+
     <!--
     <div id="map" width="1000" height="500" style="border:1px solid #ffffff;">
     </div>
     -->
     <div id="myMap" class="mapDiv"></div>
-    
+
     <script src="../js/map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVS--25wxecQtTu2gvCVBdCvOcEfwvkiM&callback=initMap"
     async defer></script>
