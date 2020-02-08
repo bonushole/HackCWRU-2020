@@ -39,7 +39,7 @@ function getDonationsRangeCandidateMonth(req, res) {
   }
   const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
   client.connect(err => {
-    const collection = client.db("Campaign_Finance").collection("RunningTotals");
+    const collection = client.db("Campaign_Finance").collection("MonthlyRunningTotalsFlat");
     collection.find(query).toArray(function(err, result) {
       if (err) throw err;
       let ret = {};
@@ -69,7 +69,7 @@ function getDonationsRangeCandidate(req, res) {
   }
   const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
   client.connect(err => {
-    const collection = client.db("Campaign_Finance").collection("RunningTotals");
+    const collection = client.db("Campaign_Finance").collection("MonthlyRunningTotalsFlat");
     collection.find(query).toArray(function(err, result) {
       if (err) throw err;
       let ret = {};
@@ -95,7 +95,7 @@ function getDonationsRangeMonth(req, res) {
   }
   const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
   client.connect(err => {
-    const collection = client.db("Campaign_Finance").collection("RunningTotals");
+    const collection = client.db("Campaign_Finance").collection("MonthlyRunningTotalsFlat");
     collection.find(query).toArray(function(err, result) {
       if (err) throw err;
       let ret = {};
@@ -121,7 +121,7 @@ function getDonationsSingleInstance(req, res) {
   }
   const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
   client.connect(err => {
-    const collection = client.db("Campaign_Finance").collection("RunningTotals");
+    const collection = client.db("Campaign_Finance").collection("MonthlyRunningTotalsFlat");
     collection.find(query).toArray(function(err, result) {
       if (err) throw err;
       let ret = {};

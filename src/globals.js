@@ -1,19 +1,18 @@
 "use strict";
 
 const MONTH_LIST = [
-  new Date("2018-09-30"),
-  new Date("2018-10-31"),
-  new Date("2018-11-30"),
-  new Date("2018-12-31"),
-  new Date("2019-01-31"),
-  new Date("2019-02-28"),
-  new Date("2019-03-31"),
-  new Date("2019-04-30"),
-  new Date("2019-05-31"),
-  new Date("2019-06-30"),
-  new Date("2019-07-31"),
-  new Date("2019-08-31"),
-  new Date("2019-09-30"),
+  new Date("2018-10-01"),
+  new Date("2018-11-01"),
+  new Date("2018-12-01"),
+  new Date("2019-01-01"),
+  new Date("2019-02-01"),
+  new Date("2019-03-01"),
+  new Date("2019-04-01"),
+  new Date("2019-05-01"),
+  new Date("2019-06-01"),
+  new Date("2019-07-01"),
+  new Date("2019-08-01"),
+  new Date("2019-09-01"),
 ];
 
 const MAIN_CANDIDATES = [
