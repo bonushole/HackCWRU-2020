@@ -5,7 +5,6 @@ const fs = require('fs');
 
 const globals = require('./globals.js');
 const common = require('./common.js');
-const zips = require('./zipToCoords.js');
 
 //var zipToCoords = zips;
 
