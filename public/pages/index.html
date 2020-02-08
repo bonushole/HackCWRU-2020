@@ -6,11 +6,21 @@
     <meta name="keywords" content="web site!">
 
     <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script type="text/javascript" src="particles.js"></script>
+    <script type="text/javascript" src="../jsjson/particles.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet"
       href='https://fonts.googleapis.com/css?family=Varela+Round|Open Sans'>
     <style>
+    
+    .mapDiv {
+
+      height: 1000px;
+      width: 1000px;
+      background-color: powderblue;
+
+    
+    }
+    
     .slidecontainer {
         width: 100%;
     }
@@ -112,31 +122,38 @@
       <div class="row">
         <h1>Select a candidate:</h1>
           <form class="column">
-            <input type="image" src="./img/Bernie-Sanders.png" alt="Sanders" width="80" height="80">
+            <input type="image" src="../img/Bernie-Sanders.png" alt="Sanders" width="80" height="80">
             <p>Bernie Sanders</p>
           </form>
           <form class="column">
-            <input type="image" src="./img/Elizabeth-Warren.png" alt="Warren" width="80" height="80">
+            <input type="image" src="../img/Elizabeth-Warren.png" alt="Warren" width="80" height="80">
             <p>Elizabeth Warren</p>
           </form>
           <form class="column">
-            <input type="image" src="./img/Pete-Buttigieg.png" alt="Buttigieg" width="80" height="80">
+            <input type="image" src="../img/Pete-Buttigieg.png" alt="Buttigieg" width="80" height="80">
             <p>Pete Buttigieg</p>
           </form>
           <form class="column">
-            <input type="image" src="./img/Joe-Biden.png" alt="Biden" width="80" height="80">
+            <input type="image" src="../img/Joe-Biden.png" alt="Biden" width="80" height="80">
             <p>Joe Biden</p>
           </form>
           <form class="column">
-            <input type="image" src="./img/Amy-Klobuchar.png" alt="Klobuchar" width="80" height="80">
+            <input type="image" src="../img/Amy-Klobuchar.png" alt="Klobuchar" width="80" height="80">
             <p>Amy Klobuchar</p>
         </form>
         <nav>
         </nav>
     </section>
-
-    <canvas id="map" width="1000" height="500" style="border:1px solid #ffffff;">
-    </canvas>
+    
+    <!--
+    <div id="map" width="1000" height="500" style="border:1px solid #ffffff;">
+    </div>
+    -->
+    <div id="myMap" class="mapDiv"></div>
+    
+    <script src="../js/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVS--25wxecQtTu2gvCVBdCvOcEfwvkiM&callback=initMap"
+    async defer></script>
 
   </body>
 </html>
