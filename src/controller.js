@@ -2,6 +2,11 @@
 
 const globals = require('./globals.js');
 const common = require('./common.js');
+const zips = require('./zipToCoords.js');
+
+//var zipToCoords = zips;
+
+//console.log(zipToCoords.getCoordsFromZip(44107));
 
 let controller = {
   getAllDonations: function(req, res) {
@@ -27,6 +32,12 @@ function getAllDonations(req, res) {
       res.send(r);
     });
   })
+}
+
+function getAllZipCodes(req, res) {
+
+  
+  
 }
 
 module.exports = controller;
