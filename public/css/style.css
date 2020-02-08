@@ -1,13 +1,14 @@
 body{
-  margin:2;
+  margin:10;
   /*background-color: #0154B3;
   position: absolute;*/
 }
-/*
+
 h1{
   text-shadow: 1.7px 1.7px #747A75;
+  font-size: 32px;
 }
-*/
+
 
 #branding{
   font-weight:bold;
@@ -28,7 +29,7 @@ header{
 }
 
 p{
-  color: white;
+  color: black;
 }
 
 /*
@@ -47,7 +48,7 @@ form:hover{
 /*Showcase*/
 #showcase{
   min-height:50px;
-  text-align: center;
+  text-align: left;
 }
 
 canvas{
