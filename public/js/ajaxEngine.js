@@ -3,14 +3,16 @@ var endDate = Date.parse("September 30, 2019");
 
 var months = []
 
-function retrieveMonths(){
+function retrieveZips(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			months = JSON.parse(this.responseText);
+		  console.log("got json");
+			var zips = JSON.parse(this.responseText);
+			initializeZipMarkers(zips);
 		}
 	};
-	xhttp.open("GET", "/api/monthly-donations, true);
+	xhttp.open("GET", "/js/zips-to-coords.json", true);
 	xhttp.send();
 	
 }
@@ -45,5 +47,7 @@ output.innerHTML = getReadableDate(slider.value);
 slider.oninput = function() {
   output.innerHTML = getReadableDate(this.value);
 }
+
+
 
 
