@@ -59,7 +59,7 @@ function initMap() {
     };
   });
   
-  drawSomeDots(sampleDots);
+  //drawSomeDots(sampleDots);
   //setTimeout(changeDots, 30);
   
   /*
@@ -67,6 +67,8 @@ function initMap() {
     console.log(JSON.stringify(map.getBounds()))
   },100);
   */
+  
+  retrieveZips();
 }
 
 function changeDots(){
@@ -81,26 +83,37 @@ function changeDots(){
 
 function initializeZipMarkers(zipsNCoords){
 
-  colors = ['blue','red','green','yellow','purple'];
-  
-  for(var color in colors){  
+  colors = ['blue','red'];//,'green','yellow','purple'];
+    var i = 0;
+  //for(var color in colors){
+    zipMarkers = {};  
+    for(var zip in zipsNCoords){
+      if(!zipsNCoords.hasOwnProperty(zip)){
+        continue;
+      }
+      if(zip[0]!='2'){
+        continue;
+      }
+      i++;
+      console.log(zip);
       var marker = new google.maps.Circle({
         strokeColor: '#FF0000',
-        strokeOpacity: 0.8,
+        strokeOpacity: 0,
         strokeWeight: 2,
         fillColor: '#FF0000',
-        fillOpacity: 0.35,
-        center:dots[i].loc,
-        radius:0,
+        fillOpacity: 0.05,
+        center:zipsNCoords[zip].loc,
+        radius:20000,
         map: map
        });
-       zipMarkers[val]={
+       zipMarkers[zip]={
          marker: marker
        };
-      
-    allZipMarkers[colors[color]]=zipMarkers;
+     }
+     console.log(i);
+    //allZipMarkers[colors[color]]=zipMarkers;
      
-  }
+  //}
 }
 
 function updateDots(color, vals){

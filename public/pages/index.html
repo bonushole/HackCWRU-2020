@@ -33,31 +33,36 @@
     <!--section id="experience"-->
       <div class="row">
         <h3>Select a candidate:</h3>
-          <div class="sanders"></div>
+          <div class="sanders">
             <form class="column">
               <input type="image" src="../img/Bernie-Sanders.png" alt="Sanders" width="80" height="80">
               <p class="top">Bernie Sanders</p>
             </form>
-          <div class="warren"></div>
+          </div>
+          <div class="warren">
             <form class="column">
               <input type="image" src="../img/Elizabeth-Warren.png" alt="Warren" width="80" height="80">
               <p>Elizabeth Warren</p>
             </form>
-          <div class="buttigieg"></div>
+          </div>
+          <div class="buttigieg">
             <form class="column">
               <input type="image" src="../img/Pete-Buttigieg.png" alt="Buttigieg" width="80" height="80">
               <p>Pete Buttigieg</p>
             </form>
-          <div class="biden"></div>
+          </div>
+          <div class="biden">
             <form class="column">
               <input type="image" src="../img/Joe-Biden.png" alt="Biden" width="80" height="80">
               <p>Joe Biden</p>
             </form>
-          <div class="klobuchar"></div>
+          </div>
+          <div class="klobuchar">
             <form class="column">
               <input type="image" src="../img/Amy-Klobuchar.png" alt="Klobuchar" width="80" height="80">
               <p>Amy Klobuchar</p>
             </form>
+          </div>
     <!--/section-->
 
 
@@ -80,7 +85,9 @@
     <div id="map" width="1000" height="500" style="border:1px solid #ffffff;">
     </div>
     -->
-    <div id="myMap" class="mapDiv"></div>
+    <div id="mapContainer">
+      <div id="myMap" class="mapDiv">
+    </div>
 
     <script src="../js/map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVS--25wxecQtTu2gvCVBdCvOcEfwvkiM&callback=initMap"
