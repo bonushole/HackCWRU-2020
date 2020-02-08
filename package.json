@@ -1,0 +1,28 @@
+{
+  "name": "hackcwru-2020",
+  "version": "1.0.0",
+  "description": "A tool to view contributions to 2020 presidential election campaigns.",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bonushole/HackCWRU-2020.git"
+  },
+  "author": "N-A-M-E",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bonushole/HackCWRU-2020/issues"
+  },
+  "homepage": "https://github.com/bonushole/HackCWRU-2020#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "mongodb": "^3.5.2",
+    "morgan": "^1.9.1",
+    "path": "^0.12.7"
+  }
+}
