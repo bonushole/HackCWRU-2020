@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="keywords" content="web site!">
+
+    <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script type="text/javascript" src="particles.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet"
+      href='https://fonts.googleapis.com/css?family=Varela+Round|Open Sans'>
+    <style>
+    .slidecontainer {
+        width: 100%;
+    }
+
+    .slidecontainer {
+      width: 50%;
+      font-weight:bold;
+    }
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 15px;
+      border-radius: 5px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+      .slider:hover {
+        opacity: 1;
+      }
+
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #2d8ded;
+        cursor: pointer;
+      }
+
+      .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #2d8ded;
+        cursor: pointer;
+      }
+
+      .column {
+        float: left;
+        width: 10%;
+        padding: 1px;
+        text-align: center;
+      }
+
+      /* Clearfix (clear floats) */
+      .row::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+      body{
+        font-family: 'Varela Round', serif;
+        font-size:12px;
+      }
+
+    </style>
+    <title>Eagle Eye</title>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+
+  <body id="particles-js" bgcolor="#6cb0f5">
+    <header>
+      <div class="container">
+        <div id="branding">
+          <h1 class="animated slideInLeft delay- 2s" align="justified">Eagle Eye</h1>
+        </div>
+        <nav>
+        </nav>
+      </div>
+    </header>
+
+    <div class="slidecontainer">
+      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+      <p>Day: <span id="demo"></span></p>
+    </div>
+
+    <script>
+      var slider = document.getElementById("myRange");
+      var output = document.getElementById("demo");
+      output.innerHTML = slider.value;
+
+      slider.oninput = function() {
+        output.innerHTML = this.value;
+      }
+    </script>
+
+    <section id="showcase">
+      <div class='container'>
+        <h2>The bird's eye view to campaign finance</h2>
+      </div>
+    </section>
+    <section id="experience">
+      <div class="row">
+        <h1>Select a candidate:</h1>
+          <form class="column">
+            <input type="image" src="./img/Bernie-Sanders.png" alt="Sanders" width="80" height="80">
+            <p>Bernie Sanders</p>
+          </form>
+          <form class="column">
+            <input type="image" src="./img/Elizabeth-Warren.png" alt="Warren" width="80" height="80">
+            <p>Elizabeth Warren</p>
+          </form>
+          <form class="column">
+            <input type="image" src="./img/Pete-Buttigieg.png" alt="Buttigieg" width="80" height="80">
+            <p>Pete Buttigieg</p>
+          </form>
+          <form class="column">
+            <input type="image" src="./img/Joe-Biden.png" alt="Biden" width="80" height="80">
+            <p>Joe Biden</p>
+          </form>
+          <form class="column">
+            <input type="image" src="./img/Amy-Klobuchar.png" alt="Klobuchar" width="80" height="80">
+            <p>Amy Klobuchar</p>
+        </form>
+        <nav>
+        </nav>
+    </section>
+
+    <canvas id="map" width="1000" height="500" style="border:1px solid #ffffff;">
+    </canvas>
+
+  </body>
+</html>
