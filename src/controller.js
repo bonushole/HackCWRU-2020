@@ -3,6 +3,8 @@
 const globals = require('./globals.js');
 const common = require('./common.js');
 
+const mongodb = require('mongodb');
+
 let controller = {
   getAllDonations: function(req, res) {
     getAllDonations(req, res);
@@ -13,20 +15,23 @@ let controller = {
 }
 
 function getAllDonations(req, res) {
-  mongodb.MongoClient.connect(globals.dbURL, function(err, db) {
-    if (err) throw err;
-    let dbo = db.db("OUR-DB-NAME-HERE");
-    let samurai = dbo.collection("OUR-COLLECTION-NAME-HERE");
-    samurai.find({}).toArray(function(err, result) {
-      db.close();
+  const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
+  client.connect(err => {
+    const collection = client.db("Campaign_Finance").collection("RunningTotals");
+    const query = {
+      "Date": new Date ("2019-09-29"), 
+      "Candidate ID": {"$regex": "P.*"},
+    }
+    collection.find(query).toArray(function(err, result) {
       if (err) throw err;
-      let r = result.map(function (s) {
+      let r = result.map(function(s) {
         s = common.removePrivateVariables(s);
         return s;
       });
       res.send(r);
+      client.close();
     });
-  })
+  });
 }
 
 module.exports = controller;
