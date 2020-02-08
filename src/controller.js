@@ -1,5 +1,8 @@
 "use strict";
 
+const mongodb = require('mongodb');
+const fs = require('fs');
+
 const globals = require('./globals.js');
 const common = require('./common.js');
 const zips = require('./zipToCoords.js');
@@ -8,40 +11,36 @@ const zips = require('./zipToCoords.js');
 
 //console.log(zipToCoords.getCoordsFromZip(44107));
 
-const mongodb = require('mongodb');
-
 let controller = {
-  getAllDonations: function(req, res) {
-    getAllDonations(req, res);
+  getDonations: function(req, res) {
+    getDonations(req, res);
   },
   hello: function(req, res) {
     res.send("Hello World!");
   },
 }
 
-function getAllDonations(req, res) {
+function getDonations(req, res) {
+  const query = {
+    "Date": new Date(req.query.dateString),
+    "Candidate ID": req.query.candidateID,
+    "Donation Type": "IND",
+  }
   const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
   client.connect(err => {
     const collection = client.db("Campaign_Finance").collection("RunningTotals");
-    const query = {
-      "Date": new Date ("2019-09-29"), 
-      "Candidate ID": {"$regex": "P.*"},
-    }
     collection.find(query).toArray(function(err, result) {
       if (err) throw err;
-      let r = result.map(function(s) {
-        s = common.removePrivateVariables(s);
-        return s;
-      });
-      res.send(r);
-      client.close();
+      console.log(result);
+      let ret = {};
+      for (let i = 0; i < result.length; i++) {
+        let r = result[i];
+        ret[r["zip"]] = r["Amount"];
+      }
+      res.send(ret);
+      client.close()
     });
   });
 }
 
-function getAllZipCodes(req, res) {
-
-  
-  
-}
 module.exports = controller;
