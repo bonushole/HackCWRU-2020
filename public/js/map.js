@@ -8,15 +8,30 @@ var sampleDots = [{loc:{lat: 41.850033, lng: -80.6500523}, size:1},
 var map;
 var zipMarkers = [];
 
+var idealBounds = {"south":23.91804631650461,"west":-126.41177104999998,"north":51.20142279408888,"east":-64.88833355};
+
 function initMap() {
   console.log("making map");
-  map = new google.maps.Map(document.getElementById('myMap'), {
-    center: {lat: 41.850033, lng: -87.6500523},
-    zoom: 4,
+  var mapElem = document.getElementById('myMap');
+  var elemRect = mapElem.getBoundingClientRect();
+  
+  var maxZoomX = (elemRect.width/700.0)*4.0;
+  var maxZoomY = (elemRect.width/700.0)*4.0;
+  
+  map = new google.maps.Map(mapElem, {
+    center: {lat: 38.850033, lng: -95.6500523},
     gestureHandling: 'none',
     zoomControl: false,
     disableDefaultUI: true,
+    zoom:4,
     mapTypeId: 'satellite'
+  });
+  
+  //map.fitBounds(idealBounds);
+  
+  google.maps.event.addListenerOnce(map, 'idle', function() {
+    map.fitBounds(idealBounds,0);
+    //console.log(JSON.stringify(map.getBounds()));
   });
   
   map.data.setStyle(function(feature) {
@@ -31,6 +46,12 @@ function initMap() {
   
   drawSomeDots(sampleDots);
   setTimeout(changeDots, 30);
+  
+  /*
+  setTimeout(function(){
+    console.log(JSON.stringify(map.getBounds()))
+  },100);
+  */
 }
 
 function changeDots(){
