@@ -1,6 +1,7 @@
 "use strict";
 
 const mongodb = require('mongodb');
+const path = require('path');
 
 const globals = require('./globals.js');
 const common = require('./common.js');
@@ -9,6 +10,9 @@ const common = require('./common.js');
 let controller = {
   getDonations: function(req, res) {
     getDonations(req, res);
+  },
+  home: function(req, res) {
+    res.sendFile(path.resolve('public/pages/index.html'));
   },
   hello: function(req, res) {
     res.send("Hello World!");
