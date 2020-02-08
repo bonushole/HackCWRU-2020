@@ -45,7 +45,7 @@ function initMap() {
   });
   
   drawSomeDots(sampleDots);
-  setTimeout(changeDots, 30);
+  //setTimeout(changeDots, 30);
   
   /*
   setTimeout(function(){
