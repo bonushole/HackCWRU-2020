@@ -1,6 +1,7 @@
 "use strict";
 
 const mongodb = require('mongodb');
+const path = require('path');
 
 const globals = require('./globals.js');
 const common = require('./common.js');
@@ -9,6 +10,9 @@ const common = require('./common.js');
 let controller = {
   getDonations: function(req, res) {
     getDonations(req, res);
+  },
+  home: function(req, res) {
+    res.sendFile(path.resolve('public/pages/index.html'));
   },
   hello: function(req, res) {
     res.send("Hello World!");
@@ -35,7 +39,7 @@ function getDonationsRangeCandidateMonth(req, res) {
   }
   const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
   client.connect(err => {
-    const collection = client.db("Campaign_Finance").collection("RunningTotals");
+    const collection = client.db("Campaign_Finance").collection("MonthlyRunningTotalsFlat");
     collection.find(query).toArray(function(err, result) {
       if (err) throw err;
       let ret = {};
@@ -65,7 +69,7 @@ function getDonationsRangeCandidate(req, res) {
   }
   const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
   client.connect(err => {
-    const collection = client.db("Campaign_Finance").collection("RunningTotals");
+    const collection = client.db("Campaign_Finance").collection("MonthlyRunningTotalsFlat");
     collection.find(query).toArray(function(err, result) {
       if (err) throw err;
       let ret = {};
@@ -91,7 +95,7 @@ function getDonationsRangeMonth(req, res) {
   }
   const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
   client.connect(err => {
-    const collection = client.db("Campaign_Finance").collection("RunningTotals");
+    const collection = client.db("Campaign_Finance").collection("MonthlyRunningTotalsFlat");
     collection.find(query).toArray(function(err, result) {
       if (err) throw err;
       let ret = {};
@@ -117,7 +121,7 @@ function getDonationsSingleInstance(req, res) {
   }
   const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
   client.connect(err => {
-    const collection = client.db("Campaign_Finance").collection("RunningTotals");
+    const collection = client.db("Campaign_Finance").collection("MonthlyRunningTotalsFlat");
     collection.find(query).toArray(function(err, result) {
       if (err) throw err;
       let ret = {};
