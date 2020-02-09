@@ -1,3 +1,16 @@
+//import cloneDeep from lodash;
+
+//var _ = require("lodash");
+
+
+function clone(objectToClone) {
+    var cloned = JSON.parse(JSON.stringify(objectToClone));
+    return cloned;
+}
+
+
+
+
 
 var sampleDots = [{loc:{lat: 41.850033, lng: -80.6500523}, size:1},
             {loc:{lat: 31.850033, lng: -90.6500523}, size:2},
@@ -12,6 +25,9 @@ var sampleDots = {loc:{lat: 41.850033, lng: -80.6500523}, size:1},
             {loc:{lat: 49.850033, lng: -77.6500523}, size:4}
             }
 */
+
+var templateMarker;
+
 var map;
 var allZipMarkers = {
 
@@ -67,6 +83,8 @@ function initMap() {
     console.log(JSON.stringify(map.getBounds()))
   },100);
   */
+  
+   
   
   retrieveZips();
   retrieveMonth();
@@ -125,34 +143,40 @@ function updateDots(color, vals){
   var zipMarkers = {};//allZipMarkers[color];
   for(var val in vals){
   
+  
   /*
     if(val[0]%70!=0){
       continue;
     }
-    */
+  */  
     if(!vals.hasOwnProperty(val)){
       continue;
       //zipMarkers[val].marker.setRadius(60000*val['Amount']);
     }
+    //console.log(val);
     if(zipMarkers.hasOwnProperty(val)){
       zipMarkers[val].marker.setRadius(60000*vals[val]);
     }else{
-      var marker = new google.maps.Circle({
+      
+      var marker = templateMarker= new google.maps.Circle({
         strokeColor: '#FF0000',
         strokeOpacity: 0,
         strokeWeight: 2,
         fillColor: '#FF0000',
         fillOpacity: 0.05,
         center:getCoordsFromZip(val),
-        radius:200000,
+        radius:60000,//10*vals[val],
         map: map
        });
+      //marker.position = vals[val]["loc"]
+      
      zipMarkers[val]={
        marker: marker
      };
     }
    
-  }  
+  }
+  console.log("done constructing markers");  
 
 }
 

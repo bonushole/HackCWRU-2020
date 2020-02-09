@@ -120,7 +120,7 @@ slider.max=range;
 output.innerHTML = getReadableDate(slider.value);
 
 
-slider.oninput = function() {
+slider.onmouseup = function() {
   
   if(getReadableDate(this.value) != month){
   
