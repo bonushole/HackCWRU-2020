@@ -1,3 +1,17 @@
+//import cloneDeep from lodash;
+
+//var _ = require("lodash");
+
+var heatmap;
+
+function clone(objectToClone) {
+    var cloned = JSON.parse(JSON.stringify(objectToClone));
+    return cloned;
+}
+
+
+
+
 
 var sampleDots = [{loc:{lat: 41.850033, lng: -80.6500523}, size:1},
             {loc:{lat: 31.850033, lng: -90.6500523}, size:2},
@@ -12,6 +26,10 @@ var sampleDots = {loc:{lat: 41.850033, lng: -80.6500523}, size:1},
             {loc:{lat: 49.850033, lng: -77.6500523}, size:4}
             }
 */
+
+var templateMarker;
+var zipMarkers = {};
+
 var map;
 var allZipMarkers = {
 
@@ -68,7 +86,16 @@ function initMap() {
   },100);
   */
   
+  heatmap = new google.maps.visualization.HeatmapLayer({
+    data:[]
+  });
+  heatmap.setMap(map);
+  
+   
+  
   retrieveZips();
+  retrieveEverything();
+  // retrieveMonth();
 }
 
 function changeDots(){
@@ -99,17 +126,17 @@ function initializeZipMarkers(zipsNCoords){
       var marker = new google.maps.Circle({
         strokeColor: '#FF0000',
         strokeOpacity: 0,
-        strokeWeight: 2,
+        strokeWeight: 10000,
         fillColor: '#FF0000',
         fillOpacity: 0.05,
         center:zipsNCoords[zip].loc,
         radius:20000,
         map: map
        });
-       zipMarkers[zip]={
-         marker: marker
-       };
-     }
+     zipMarkers[zip]={
+       marker: marker
+     };
+   }
      console.log(i);
     //allZipMarkers[colors[color]]=zipMarkers;
      
@@ -118,15 +145,60 @@ function initializeZipMarkers(zipsNCoords){
 
 function updateDots(color, vals){
 
-  //console.log(zipMarkers);
-  var zipMarkers = allZipMarkers[color];
+  console.log(color);
+  console.log(vals);
+  console.log(Object.keys(vals).length);
+  let i = -1;
+  //allZipMarkers[color];
   for(var val in vals){
-    
-    if(vals.hasOwnProperty(val)){
-      zipMarkers[val].marker.setRadius(60000*val['Amount']);
+    i += 1;
+    if(i % 50 != 0){
+      continue;
+    }
+    if(!vals.hasOwnProperty(val)){
+      continue;
+      //zipMarkers[val].marker.setRadius(60000*val['Amount']);
+    }
+    //console.log(val);
+    if(zipMarkers.hasOwnProperty(val)){
+      //console.log("updating props");
+      // zipMarkers[val].marker.weight = vals[val]*.1;
+      zipMarkers[val].marker.weight = 10000000;
+    }else{
+      var coords = getCoordsFromZip(val);
+      //console.log(coords);
+      if(coords == undefined){
+        continue;
+      }
+      
+      
+      var marker = {location:new google.maps.LatLng(coords['lat'], coords['lng']), weight: vals[val]*.1};
+      
+      heatmap.data.push(marker);
+      zipMarkers[val]={
+       marker: marker
+     };
+      /*
+      var marker = templateMarker= new google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.05,
+        center:getCoordsFromZip(val),
+        radius:1000*vals[val],//10*vals[val],
+        map: map
+       });
+      //marker.position = vals[val]["loc"]
+      
+     zipMarkers[val]={
+       marker: marker
+     };
+     */
     }
    
-  }  
+  }
+  console.log("done constructing markers");  
 
 }
 

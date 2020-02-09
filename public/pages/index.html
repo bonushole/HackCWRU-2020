@@ -8,6 +8,7 @@
     <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script type="text/javascript" src="../jsjson/particles.js"></script>
 
+
     <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet"
@@ -45,51 +46,63 @@
         <h3>Select a candidate:</h3>
           <br>
           <div class="icon">
-            <form class="column">
+            <form class="column" onclick="bernieSanders()">
               <input type="image" src="../img/sanders.png" alt="Sanders" width="50" height="50">
               <p>Bernie Sanders</p>
             </form>
           </div>
           <div class="icon">
-            <form class="column">
+            <form class="column" onclick="elWarren()">>
               <input type="image" src="../img/warren.png" alt="Warren" width="50" height="50">
               <p>Elizabeth Warren</p>
             </form>
           </div>
           <div class="icon">
-            <form class="column">
+            <form class="column" onclick="peteButtigieg()">>
               <input type="image" src="../img/buttigieg.png" alt="Buttigieg" width="50" height="50">
               <p>Pete Buttigieg</p>
             </form>
           </div>
           <div class="icon">
-            <form class="column">
+            <form class="column" onclick="joeBiden()">>
               <input type="image" src="../img/biden.png" alt="Biden" width="50" height="50">
               <p>Joe Biden</p>
             </form>
           </div>
           <div class="icon">
-            <form class="column">
+            <form class="column" onclick="amyKlobuchar()">>
               <input type="image" src="../img/klobuchar.png" alt="Klobuchar" width="50" height="50">
               <p>Amy Klobuchar</p>
             </form>
           </div>
     <!--/section-->
 
-
     <div class="slidecontainer">
       <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-      <p>Day: <span id="demo"></span></p>
+      <p><span id="demo"></span></p>
     </div>
 
-    <script>
-      var slider = document.getElementById("myRange");
-      var output = document.getElementById("demo");
-      output.innerHTML = slider.value;
+    <script src="../js/ajaxEngine.js"></script>
 
-      slider.oninput = function() {
-        output.innerHTML = this.value;
+    <script>
+
+
+      function bernieSanders() {
+        /*document.getElementById("demo").innerHTML = "Sanders";*/
       }
+      function elWarren() {
+        /*document.getElementById("demo").innerHTML = "Warren";*/
+      }
+      function peteButtigieg() {
+        /*document.getElementById("demo").innerHTML = "Buttigieg";*/
+      }
+      function joeBiden() {
+        /*document.getElementById("demo").innerHTML = "Biden";*/
+      }
+      function amyKlobuchar() {
+        /*document.getElementById("demo").innerHTML = "Klobuchar";*/
+      }
+
     </script>
 
     <div id="mapid"></div>
