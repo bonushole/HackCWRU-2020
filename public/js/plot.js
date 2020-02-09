@@ -12,12 +12,12 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(mymap);
 
 
-function plotMap(result, date) {
+function plotMap(result, date, candidates, vis_type) {//vis_type = 1, standart, vis_type = 2, all same size, vis_type = 3, normalized (anti biden)
               console.log("plotting");
               console.log(result);
               cData = result;
               vals1 = cData[new Date(date)]["P60007168"];
-              vals2 = cData[new Date(date)]["P00009621"];
+              vals2 = cData[new Date(date)]["P00009621"]; 
               vals3 = cData[new Date(date)]["P80006117"];
               vals4 = cData[new Date(date)]["P00010298"];
               vals5 = cData[new Date(date)]["P80000722"];
@@ -26,11 +26,11 @@ function plotMap(result, date) {
                 if (z2c[valKeys[i]] != null) {
                   let lat = z2c[valKeys[i]]["lat"];
                   let lng = z2c[valKeys[i]]["lng"];
-                  let a = vals1[valKeys[i]];
-                  let b = vals2[valKeys[i]];
-                  let c = vals3[valKeys[i]];
-                  let d = vals4[valKeys[i]];
-                  let e = vals5[valKeys[i]];
+                  let a = vals1[valKeys[i]] * candidates[0];
+                  let b = vals2[valKeys[i]] * candidates[1];
+                  let c = vals3[valKeys[i]] * candidates[2];
+                  let d = vals4[valKeys[i]] * candidates[3];
+                  let e = vals5[valKeys[i]] * candidates[4];
                   if (!a) {
                     a = 0;
                   }
@@ -56,7 +56,15 @@ function plotMap(result, date) {
                     candList.splice(candList.indexOf(max), 1);
                     let secondMax = Math.max(...candList);
                     let delta = max - secondMax;
-                    L.circle([lat, lng], {radius: delta, color: color}).addTo(mymap);
+					if(vis_type == 0){
+						let r = delta;
+					}else if(vis_type == 1){
+						let r = 5000;
+					}else{
+						let r = 5000 * Math.log(delta/3000 + 1);
+					}
+	
+                    L.circle([lat, lng], {radius: r, color: color}).addTo(mymap);
                   }
                 }
               }
