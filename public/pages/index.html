@@ -14,6 +14,20 @@
     <link rel="stylesheet"
       href='https://fonts.googleapis.com/css?family=Varela+Round|OpenSans'>
 
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""></script>
+      
+      
+         <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+    <!-- /Leaflet -->
     <title>Electi.online</title>
     <link rel="stylesheet" href="../css/style.css">
   </head>
@@ -76,22 +90,29 @@
       <p><span id="demo"></span></p>
     </div>
     
+   
+    <div id="mapid"></div>
+    
+    
+    <script src="../js/plot.js"></script>
     <script src="../js/ajaxEngine.js"></script>
+
+ 
+
+    <script>
+
+    </script>
 
     <!--
     <div id="map" width="1000" height="500" style="border:1px solid #ffffff;">
     </div>
     -->
-    <div id="mapContainer">
+    <!-- <div id="mapContainer">
       <div id="myMap" class="mapDiv">
     </div>
 
     <script src="../js/map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVS--25wxecQtTu2gvCVBdCvOcEfwvkiM&callback=initMap&libraries=visualization"
-    async defer></script>
-    <script
-			  src="https://code.jquery.com/jquery-3.4.1.min.js"
-			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			  crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVS--25wxecQtTu2gvCVBdCvOcEfwvkiM&callback=initMap"
+    async defer></script> -->
   </body>
 </html>

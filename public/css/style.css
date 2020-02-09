@@ -1,3 +1,7 @@
+#mapid {
+  height: 700px;
+}
+
 #mapContainer {
   width:50%;
   height:300px;
@@ -10,7 +14,7 @@
   height:100%;
   margin:auto;
   display:block;
-  */
+  
 }
 
 .slidecontainer {

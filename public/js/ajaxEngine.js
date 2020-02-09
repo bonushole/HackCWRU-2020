@@ -1,5 +1,5 @@
-var startDate = Date.parse("October 1, 2018");
-var endDate = Date.parse("September 1, 2019");
+var startDate = Date.parse("January 31, 2019");
+var endDate = Date.parse("August 31, 2019");
 var cachedData;
 
 var candidates = {
@@ -126,6 +126,8 @@ function queryDate(date){
   
   }
   */
+  
+  
   console.log("month");
   console.log(month);
   
@@ -134,8 +136,9 @@ function queryDate(date){
     return;
   
   }else{
-    console.log(new Date(date))
-    updateDots('P60007168', cachedData[new Date(date)]["P60007168"])
+    console.log(date)
+    //updateDots('P60007168', cachedData[new Date(date)]["P60007168"])
+    plotMap(cachedData,date);
   
   }
   
@@ -239,6 +242,36 @@ function amyKlobuchar() {
   /*document.getElementById("demo").innerHTML = "Klobuchar";*/
 }
 
+
+
+
+
+
+
+
+      
+console.log("Trying to retrieve everything...");
+$.ajax({
+  type: "GET",
+  url: "http://localhost:5000/js/z2c.json",
+  success: function(result) {
+    z2c = result;
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:5000/api/donations/",
+      data: {
+        monthRange: true,
+        candidateRange: true,
+      },
+      success: function(result){
+      
+        cachedData = result;
+        queryDate(getSendableDate(slider.value));
+      
+      },
+    });
+  }
+});
 
 
 
