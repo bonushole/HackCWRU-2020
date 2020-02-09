@@ -8,9 +8,9 @@ const globals = require('./globals.js');
 const common = require('./common.js');
 
 const RANGE_CANDIDATE_MONTH_CACHE = './public/cache/donationsRangeCandidateMonth.json';
-// const RANGE_CANDIDATE_CACHE = '../public/cache/donationsRangeCandidate.json';
-// const RANGE_MONTH_CACHE = '../public/cache/donationsRangeMonth.json';
-// const SINGLE_INSTANCE_CACHE = '../public/cache/donationsSingleInstance.json';
+const RANGE_CANDIDATE_CACHE = './public/cache/donationsRangeCandidate';
+const RANGE_MONTH_CACHE = './public/cache/donationsRangeMonth';
+const SINGLE_INSTANCE_CACHE = './public/cache/donationsSingleInstance';
 
 let controller = {
   getDonations: function(req, res) {
@@ -69,25 +69,11 @@ function getDonationsRangeCandidateMonth(req, res) {
           ret[month][candidate] = {} ;
         }
       }
-      // for (let k = 0; k < result.length; k++) {
-      // console.log(result);
-      // console.log(result.length);
       for (let k = 0; k < result.length; k++) {
         let r = result[k];
-        // console.log(r);
-        // console.log(r["Date"]);
-        // console.log(r["Candidate ID"]);
-        // console.log(r["zip"]);
         ret[r["Date"]][r["Candidate ID"]][r["zip"]] = r["Amount"];
       }
       console.log("Finishing building structure. Writing to file...");
-      // let month1 = globals.monthListMongoDB[4];
-      // let month2 = globals.monthListMongoDB[6];
-      // let candidate1 = globals.mainCandidates[2];
-      // let candidate2 = globals.mainCandidates[4];
-      // console.log(month1 + ", " + candidate1 + ": ");
-      // for (let index = 0; index < )
-      // console.log(month2 + ", " + candidate2 + ": ");
       fs.writeFile(RANGE_CANDIDATE_MONTH_CACHE, JSON.stringify(ret), function(err) {
         if (err) throw err;
         console.log("Wrote to file!");
@@ -99,6 +85,13 @@ function getDonationsRangeCandidateMonth(req, res) {
 }
 
 function getDonationsRangeCandidate(req, res) {
+  let filepath = RANGE_CANDIDATE_CACHE + "_" + req.query.dateString + ".json";
+  console.log("Checking if file exists...");
+  if (fs.existsSync(filepath)) {
+    console.log("Exists!");
+    res.sendFile(path.resolve(filepath));
+    return;
+  }
   const query = {
     "Date": new Date(req.query.dateString),
     "Candidate ID": {"$in": globals.mainCandidates},
@@ -118,13 +111,25 @@ function getDonationsRangeCandidate(req, res) {
           ret[candidate][r["zip"]] = r["Amount"];
         }
       }
-      res.send(ret);
-      client.close();
-    })
+      console.log("Finishing building structure. Writing to file...");
+      fs.writeFile(filepath, JSON.stringify(ret), function(err) {
+        if (err) throw err;
+        console.log("Wrote to file!");
+        res.sendFile(path.resolve(filepath));
+        client.close();
+      });
+    });
   });
 }
 
 function getDonationsRangeMonth(req, res) {
+  let filepath = RANGE_MONTH_CACHE + "_" + req.query.candidateID + ".json";
+  console.log("Checking if file exists...");
+  if (fs.existsSync(filepath)) {
+    console.log("Exists!");
+    res.sendFile(path.resolve(filepath));
+    return;
+  }
   const query = {
     "Date": {"$in": globals.monthListMongoDB},
     "Candidate ID": req.query.candidateID,
@@ -144,13 +149,24 @@ function getDonationsRangeMonth(req, res) {
           ret[month][r["zip"]] = r["Amount"];
         }
       }
-      res.send(ret);
-      client.close();
-    })
+      fs.writeFile(filepath, JSON.stringify(ret), function(err) {
+        if (err) throw err;
+        console.log("Wrote to file!");
+        res.sendFile(path.resolve(filepath));
+        client.close();
+      });
+    });
   });
 }
 
 function getDonationsSingleInstance(req, res) {
+  let filepath = SINGLE_INSTANCE_CACHE + "_" + req.query.dateString + "_" + req.query.candidateID + ".json";
+  console.log("Checking if file exists...");
+  if (fs.existsSync(filepath)) {
+    console.log("Exists!");
+    res.sendFile(path.resolve(filepath));
+    return;
+  }
   const query = {
     "Date": new Date(req.query.dateString),
     "Candidate ID": req.query.candidateID,
@@ -158,7 +174,7 @@ function getDonationsSingleInstance(req, res) {
   }
   const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
   client.connect(err => {
-    const collection = client.db("Campaign_Finance").collection("MonthlyRunningTotalsFlat");
+    const collection = client.db("Campaign_Finance").collection("RunningTotals");
     collection.find(query).toArray(function(err, result) {
       if (err) throw err;
       let ret = {};
@@ -166,8 +182,12 @@ function getDonationsSingleInstance(req, res) {
         let r = result[i];
         ret[r["zip"]] = r["Amount"];
       }
-      res.send(ret);
-      client.close()
+      fs.writeFile(filepath, JSON.stringify(ret), function(err) {
+        if (err) throw err;
+        console.log("Wrote to file!");
+        res.sendFile(path.resolve(filepath));
+        client.close();
+      });
     });
   });
 }
