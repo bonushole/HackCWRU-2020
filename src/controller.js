@@ -45,7 +45,7 @@ function getDonationsRangeCandidateMonth(req, res) {
   }
   console.log("Does not exist.");
   const query = {
-    "Date": {"$in": globals.monthList},
+    "Date": {"$in": globals.monthListMongoDB},
     "Candidate ID": {"$in": globals.mainCandidates},
     "Donation Type": "IND",
   }
@@ -60,20 +60,34 @@ function getDonationsRangeCandidateMonth(req, res) {
       if (err) throw err;
       let ret = {};
       console.log("Building return structure");
-      for (let i = 0; i < globals.monthList.length; i++) {
-        let month = globals.monthList[i];
+      for (let i = 0; i < globals.monthListMongoDB.length; i++) {
+        let month = globals.monthListMongoDB[i];
         console.log("Processing date " + month);
         ret[month] = {};
         for (let j = 0; j < globals.mainCandidates.length; j++) {
           let candidate = globals.mainCandidates[j];
           ret[month][candidate] = {} ;
-          for (let k = 0; k < result.length; k++) {
-            let r = result[k];
-            ret[month][candidate][r["zip"]] = r["Amount"];
-          }
         }
       }
+      // for (let k = 0; k < result.length; k++) {
+      // console.log(result);
+      // console.log(result.length);
+      for (let k = 0; k < result.length; k++) {
+        let r = result[k];
+        // console.log(r);
+        // console.log(r["Date"]);
+        // console.log(r["Candidate ID"]);
+        // console.log(r["zip"]);
+        ret[r["Date"]][r["Candidate ID"]][r["zip"]] = r["Amount"];
+      }
       console.log("Finishing building structure. Writing to file...");
+      // let month1 = globals.monthListMongoDB[4];
+      // let month2 = globals.monthListMongoDB[6];
+      // let candidate1 = globals.mainCandidates[2];
+      // let candidate2 = globals.mainCandidates[4];
+      // console.log(month1 + ", " + candidate1 + ": ");
+      // for (let index = 0; index < )
+      // console.log(month2 + ", " + candidate2 + ": ");
       fs.writeFile(RANGE_CANDIDATE_MONTH_CACHE, JSON.stringify(ret), function(err) {
         if (err) throw err;
         console.log("Wrote to file!");
@@ -112,7 +126,7 @@ function getDonationsRangeCandidate(req, res) {
 
 function getDonationsRangeMonth(req, res) {
   const query = {
-    "Date": {"$in": globals.monthList},
+    "Date": {"$in": globals.monthListMongoDB},
     "Candidate ID": req.query.candidateID,
     "Donation Type": "IND",
   }
@@ -122,8 +136,8 @@ function getDonationsRangeMonth(req, res) {
     collection.find(query).toArray(function(err, result) {
       if (err) throw err;
       let ret = {};
-      for (let i = 0; i < globals.monthList.length; i++) {
-        let month = globals.monthList[i];
+      for (let i = 0; i < globals.monthListMongoDB.length; i++) {
+        let month = globals.monthListMongoDB[i];
         ret [month] = {};
         for (let j = 0; j < result.length; j++) {
           let r = result[j];
