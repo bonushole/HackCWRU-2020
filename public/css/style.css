@@ -14,16 +14,12 @@
 }
 
 .slidecontainer {
-    width: 100%;
+    width: 50%;
     padding-left:25%;
     padding-right:25%;
     padding-top:0%;
     padding-bottom:0%;
-}
-
-.slidecontainer {
-  width: 50%;
-  font-weight:bold;
+    font-weight:bold;
 }
 
 .slider {
@@ -48,7 +44,7 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #0077ff;
+    background: #1f8fff;
     cursor: pointer;
   }
 
@@ -56,7 +52,7 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #0077ff;
+    background: #1f8fff;
     cursor: pointer;
   }
   .icon{
@@ -64,7 +60,11 @@
   }
   .column {
     float: left;
+    display: inline-block;
+    padding: 14px 16px;
     width: 5%;
+    margin : 0 auto;
+    position: relative;
     /*padding: 1px;*/
     text-align: center;
   }
@@ -139,13 +139,15 @@ form:hover{
 
 /*Showcase*/
 #showcase{
-  min-height:50px;
+  min-height:25px;
   text-align: center;
 }
 
 .row{
   text-align: center;
-  margin-top: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 #particle-container{
