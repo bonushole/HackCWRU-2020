@@ -163,7 +163,7 @@ function updateDots(color, vals){
     if(zipMarkers.hasOwnProperty(val)){
       //console.log("updating props");
       // zipMarkers[val].marker.weight = vals[val]*.1;
-      zipMarkers[val].marker.weight = 10000000;
+      zipMarkers[val].marker.weight = vals[val]*.3;
     }else{
       var coords = getCoordsFromZip(val);
       //console.log(coords);
@@ -172,7 +172,7 @@ function updateDots(color, vals){
       }
       
       
-      var marker = {location:new google.maps.LatLng(coords['lat'], coords['lng']), weight: vals[val]*.1};
+      var marker = {location:new google.maps.LatLng(coords['lat'], coords['lng']), weight: vals[val]*.3};
       
       heatmap.data.push(marker);
       zipMarkers[val]={
