@@ -69,6 +69,7 @@ function initMap() {
   */
   
   retrieveZips();
+  retrieveMonth();
 }
 
 function changeDots(){
@@ -106,10 +107,10 @@ function initializeZipMarkers(zipsNCoords){
         radius:20000,
         map: map
        });
-       zipMarkers[zip]={
-         marker: marker
-       };
-     }
+     zipMarkers[zip]={
+       marker: marker
+     };
+   }
      console.log(i);
     //allZipMarkers[colors[color]]=zipMarkers;
      
@@ -118,12 +119,37 @@ function initializeZipMarkers(zipsNCoords){
 
 function updateDots(color, vals){
 
-  //console.log(zipMarkers);
-  var zipMarkers = allZipMarkers[color];
+  console.log(color);
+  console.log(vals);
+  console.log(Object.keys(vals).length);
+  var zipMarkers = {};//allZipMarkers[color];
   for(var val in vals){
-    
-    if(vals.hasOwnProperty(val)){
-      zipMarkers[val].marker.setRadius(60000*val['Amount']);
+  
+  /*
+    if(val[0]%70!=0){
+      continue;
+    }
+    */
+    if(!vals.hasOwnProperty(val)){
+      continue;
+      //zipMarkers[val].marker.setRadius(60000*val['Amount']);
+    }
+    if(zipMarkers.hasOwnProperty(val)){
+      zipMarkers[val].marker.setRadius(60000*vals[val]);
+    }else{
+      var marker = new google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.05,
+        center:getCoordsFromZip(val),
+        radius:200000,
+        map: map
+       });
+     zipMarkers[val]={
+       marker: marker
+     };
     }
    
   }  
