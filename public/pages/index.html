@@ -37,37 +37,36 @@
         <h3>Select a candidate:</h3>
           <br>
           <div class="icon">
-            <form class="column">
+            <form class="column" onclick="bernieSanders()">
               <input type="image" src="../img/sanders.png" alt="Sanders" width="50" height="50">
               <p>Bernie Sanders</p>
             </form>
           </div>
           <div class="icon">
-            <form class="column">
+            <form class="column" onclick="elWarren()">>
               <input type="image" src="../img/warren.png" alt="Warren" width="50" height="50">
               <p>Elizabeth Warren</p>
             </form>
           </div>
           <div class="icon">
-            <form class="column">
+            <form class="column" onclick="peteButtigieg()">>
               <input type="image" src="../img/buttigieg.png" alt="Buttigieg" width="50" height="50">
               <p>Pete Buttigieg</p>
             </form>
           </div>
           <div class="icon">
-            <form class="column">
+            <form class="column" onclick="joeBiden()">>
               <input type="image" src="../img/biden.png" alt="Biden" width="50" height="50">
               <p>Joe Biden</p>
             </form>
           </div>
           <div class="icon">
-            <form class="column">
+            <form class="column" onclick="amyKlobuchar()">>
               <input type="image" src="../img/klobuchar.png" alt="Klobuchar" width="50" height="50">
               <p>Amy Klobuchar</p>
             </form>
           </div>
     <!--/section-->
-
 
     <div class="slidecontainer">
       <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
@@ -81,6 +80,22 @@
 
       slider.oninput = function() {
         output.innerHTML = this.value;
+      }
+
+      function bernieSanders() {
+        /*document.getElementById("demo").innerHTML = "Sanders";*/
+      }
+      function elWarren() {
+        /*document.getElementById("demo").innerHTML = "Warren";*/
+      }
+      function peteButtigieg() {
+        /*document.getElementById("demo").innerHTML = "Buttigieg";*/
+      }
+      function joeBiden() {
+        /*document.getElementById("demo").innerHTML = "Biden";*/
+      }
+      function amyKlobuchar() {
+        /*document.getElementById("demo").innerHTML = "Klobuchar";*/
       }
     </script>
 
