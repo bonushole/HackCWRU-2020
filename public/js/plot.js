@@ -1,6 +1,6 @@
 let z2c; let cData;
-const colors = ["#0000ff", "#ff0000", "#ffff00", "#8357aa", "#00dd00"];
-const names = ["sanders", "warren", "buttigieg", "biden", "klobuchar"];
+const colors = ["#0000ff", "#ff0000", "#00dd00", "#ffff00", "#8357aa"];
+const names = ["sanders", "warren", "klobuchar", "buttigieg", "biden", ];
 
 
 var mymap = L.map('mapid').setView([38.0, -96.0], 5);
@@ -32,9 +32,9 @@ function plotMap(result, date, candidates, vis_type) {//vis_type = 1, standart, 
                   let lng = z2c[valKeys[i]]["lng"];
                   let a = vals1[valKeys[i]] * candidates['sanders'];
                   let b = vals2[valKeys[i]] * candidates['warren'];
-                  let c = vals3[valKeys[i]] * candidates['rat'];
-                  let d = vals4[valKeys[i]] * candidates['biden'];
-                  let e = vals5[valKeys[i]] * candidates['klob'];
+                  let c = vals3[valKeys[i]] * candidates['klob'];
+                  let d = vals4[valKeys[i]] * candidates['rat'];
+                  let e = vals5[valKeys[i]] * candidates['biden'];
                   if (!a) {
                     a = 0;
                   }
