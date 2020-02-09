@@ -1,6 +1,7 @@
 var startDate = Date.parse("January 31, 2019");
 var endDate = Date.parse("August 31, 2019");
 var cachedData;
+var display = 0;
 
 var candidates = {
   "P60007168": "Sanders",
@@ -147,7 +148,7 @@ function queryDate(date){
     console.log(date)
     //updateDots('P60007168', cachedData[new Date(date)]["P60007168"])
     //candidates = [true, true, true, true];
-    plotMap(cachedData,date,selectedCandidates, 0);
+    plotMap(cachedData,date,selectedCandidates, display);
   
   }
   
@@ -288,6 +289,15 @@ function amyKlobuchar() {
 
       
 console.log("Trying to retrieve everything...");
+
+var urlParams = new URLSearchParams(window.location.search);
+
+if(urlParams.has('display')){
+
+  display = urlParams.get('display');
+
+}
+
 $.ajax({
   type: "GET",
   url: "/js/z2c.json",
