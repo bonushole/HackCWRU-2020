@@ -2,10 +2,15 @@
 
 const mongodb = require('mongodb');
 const path = require('path');
+const fs = require('fs');
 
 const globals = require('./globals.js');
 const common = require('./common.js');
 
+const RANGE_CANDIDATE_MONTH_CACHE = './public/cache/donationsRangeCandidateMonth.json';
+// const RANGE_CANDIDATE_CACHE = '../public/cache/donationsRangeCandidate.json';
+// const RANGE_MONTH_CACHE = '../public/cache/donationsRangeMonth.json';
+// const SINGLE_INSTANCE_CACHE = '../public/cache/donationsSingleInstance.json';
 
 let controller = {
   getDonations: function(req, res) {
@@ -32,31 +37,49 @@ function getDonations(req, res) {
 }
 
 function getDonationsRangeCandidateMonth(req, res) {
+  console.log("Checking if file exists...")
+  if (fs.existsSync(RANGE_CANDIDATE_MONTH_CACHE)) {
+    console.log("Exists!");
+    res.sendFile(path.resolve(RANGE_CANDIDATE_MONTH_CACHE));
+    return;
+  }
+  console.log("Does not exist.");
   const query = {
     "Date": {"$in": globals.monthList},
     "Candidate ID": {"$in": globals.mainCandidates},
     "Donation Type": "IND",
   }
+  console.log("Creating Mongo client...");
   const client = new mongodb.MongoClient(globals.dbURL, {useNewUrlParser: true});
   client.connect(err => {
+    console.log("Connected!")
     const collection = client.db("Campaign_Finance").collection("MonthlyRunningTotalsFlat");
+    console.log("Searching for query...");
     collection.find(query).toArray(function(err, result) {
+      console.log("Search complete!");
       if (err) throw err;
       let ret = {};
+      console.log("Building return structure");
       for (let i = 0; i < globals.monthList.length; i++) {
         let month = globals.monthList[i];
+        console.log("Processing date " + month);
         ret[month] = {};
         for (let j = 0; j < globals.mainCandidates.length; j++) {
           let candidate = globals.mainCandidates[j];
-          ret[month][candidate] = {};
+          ret[month][candidate] = {} ;
           for (let k = 0; k < result.length; k++) {
             let r = result[k];
             ret[month][candidate][r["zip"]] = r["Amount"];
           }
         }
       }
-      res.send(ret);
-      client.close();
+      console.log("Finishing building structure. Writing to file...");
+      fs.writeFile(RANGE_CANDIDATE_MONTH_CACHE, JSON.stringify(ret), function(err) {
+        if (err) throw err;
+        console.log("Wrote to file!");
+        res.sendFile(path.resolve(RANGE_CANDIDATE_MONTH_CACHE));
+        client.close();
+      });
     });
   });
 }
@@ -107,7 +130,7 @@ function getDonationsRangeMonth(req, res) {
           ret[month][r["zip"]] = r["Amount"];
         }
       }
-      res.json(ret);
+      res.send(ret);
       client.close();
     })
   });
