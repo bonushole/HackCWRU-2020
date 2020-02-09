@@ -201,21 +201,23 @@ slider.onmouseup = function() {
 
 function toggleCandidate(candidate){
 
+
   //console.log("clicking our big smooth boy");
   /*document.getElementById("demo").innerHTML = "Sanders";*/
   var wrappingDiv = document.getElementById(candidate);
   if(selectedCandidates.includes(candidate)){
     selectedCandidates.splice(selectedCandidates.indexOf(candidate),1);
     
-    wrappingDiv.className="column";
+    wrappingDiv.style.backgroundColor = "#000000";
   }else{
   
-    if(selectedCandidates.length < 2){
+    
       console.log("changing the class");
-      wrappingDiv.className="columnSelected";
+      wrappingDiv.style.backgroundColor = "#013F85";
       selectedCandidates.push(candidate);
-    }
+    
   }
+  
 
 }
 
