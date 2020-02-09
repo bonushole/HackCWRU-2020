@@ -58,6 +58,10 @@
   .icon{
     padding: 0;
   }
+  .iconSelected{
+    padding: 0;
+    background:#013F85;
+  }
   .column {
     float: left;
     display: inline-block;
@@ -67,6 +71,18 @@
     position: relative;
     /*padding: 1px;*/
     text-align: center;
+  }
+  
+  .columnSelected {
+    float: left;
+    display: inline-block;
+    padding: 14px 16px;
+    width: 5%;
+    margin : 0 auto;
+    position: relative;
+    /*padding: 1px;*/
+    text-align: center;
+    background:#013F85;
   }
 
   .row::after {

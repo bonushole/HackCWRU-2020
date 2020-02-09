@@ -25,7 +25,9 @@
           <h1 class="animated slideInLeft delay- 2s" align="justified">Electi.online</h1>
         </div>
       </div>
+      
     </header>
+   
 
     <section id="showcase">
       <div class='container'>
@@ -37,32 +39,32 @@
       <div class="row">
         <h3>Select a candidate:</h3>
           <br>
-          <div class="icon">
+          <div class="icon" id="sandersWrap">
             <form action="javascript:void(0);" class="column" onclick="bernieSanders()">
-              <input type="image" src="../img/sanders.png" alt="Sanders" width="50" height="50">
+              <input type="image" id="sanders" src="../img/sanders.png" alt="Sanders" width="50" height="50">
               <p>Bernie Sanders</p>
             </form>
           </div>
-          <div class="icon">
-            <form action="javascript:void(0);" class="column" onclick="elWarren()">>
+          <div class="icon" id="warrenWrap">
+            <form action="javascript:void(0);" id="warren" class="column" onclick="elWarren()">>
               <input type="image" src="../img/warren.png" alt="Warren" width="50" height="50">
               <p>Elizabeth Warren</p>
             </form>
           </div>
-          <div class="icon">
-            <form action="javascript:void(0);" class="column" onclick="peteButtigieg()">>
+          <div class="icon" id="ratWrap">
+            <form action="javascript:void(0);" id="rat" class="column" onclick="peteButtigieg()">>
               <input type="image" src="../img/buttigieg.png" alt="Buttigieg" width="50" height="50">
               <p>Pete Buttigieg</p>
             </form>
           </div>
-          <div class="icon">
-            <form action="javascript:void(0);" class="column" onclick="joeBiden()">>
+          <div class="icon" id="bidenWrap">
+            <form action="javascript:void(0);" id="biden" class="column" onclick="joeBiden()">>
               <input type="image" src="../img/biden.png" alt="Biden" width="50" height="50">
               <p>Joe Biden</p>
             </form>
           </div>
-          <div class="icon">
-            <form action="javascript:void(0);" class="column" onclick="amyKlobuchar()">>
+          <div class="icon" id="klobWrap">
+            <form action="javascript:void(0);" id="klob" class="column" onclick="amyKlobuchar()">>
               <input type="image" src="../img/klobuchar.png" alt="Klobuchar" width="50" height="50">
               <p>Amy Klobuchar</p>
             </form>
@@ -73,29 +75,8 @@
       <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
       <p><span id="demo"></span></p>
     </div>
-
+    
     <script src="../js/ajaxEngine.js"></script>
-
-    <script>
-
-
-      function bernieSanders() {
-        /*document.getElementById("demo").innerHTML = "Sanders";*/
-      }
-      function elWarren() {
-        /*document.getElementById("demo").innerHTML = "Warren";*/
-      }
-      function peteButtigieg() {
-        /*document.getElementById("demo").innerHTML = "Buttigieg";*/
-      }
-      function joeBiden() {
-        /*document.getElementById("demo").innerHTML = "Biden";*/
-      }
-      function amyKlobuchar() {
-        /*document.getElementById("demo").innerHTML = "Klobuchar";*/
-      }
-
-    </script>
 
     <!--
     <div id="map" width="1000" height="500" style="border:1px solid #ffffff;">

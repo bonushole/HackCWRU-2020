@@ -10,6 +10,8 @@ var candidates = {
   "P80000722": "Biden"
 };
 
+var selectedCandidates=[];
+
 var months = {};
 
 var zipsNCoords = [];
@@ -191,6 +193,52 @@ slider.onmouseup = function() {
   }
   output.innerHTML = getReadableDate(this.value);
 }
+
+
+
+function toggleCandidate(candidate){
+
+  //console.log("clicking our big smooth boy");
+  /*document.getElementById("demo").innerHTML = "Sanders";*/
+  var wrappingDiv = document.getElementById(candidate);
+  if(selectedCandidates.includes(candidate)){
+    selectedCandidates.splice(selectedCandidates.indexOf(candidate),1);
+    
+    wrappingDiv.className="column";
+  }else{
+  
+    if(selectedCandidates.length < 2){
+      console.log("changing the class");
+      wrappingDiv.className="columnSelected";
+      selectedCandidates.push(candidate);
+    }
+  }
+
+}
+
+
+function bernieSanders() {
+
+  toggleCandidate("sanders");
+  
+}
+function elWarren() {
+  toggleCandidate("warren");
+  /*document.getElementById("demo").innerHTML = "Warren";*/
+}
+function peteButtigieg() {
+  toggleCandidate("rat");
+  /*document.getElementById("demo").innerHTML = "Buttigieg";*/
+}
+function joeBiden() {
+  toggleCandidate("biden");
+  /*document.getElementById("demo").innerHTML = "Biden";*/
+}
+function amyKlobuchar() {
+  toggleCandidate("klob");
+  /*document.getElementById("demo").innerHTML = "Klobuchar";*/
+}
+
 
 
 
