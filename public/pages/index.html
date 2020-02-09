@@ -139,11 +139,11 @@
             success: function(result) {
               // console.log(result);
               cData = result;
-              vals1 = cData[new Date("2019-05-01")]["P60007168"];
-              vals2 = cData[new Date("2019-05-01")]["P00009621"];
-              vals3 = cData[new Date("2019-05-01")]["P80006117"];
-              vals4 = cData[new Date("2019-05-01")]["P00010298"];
-              vals5 = cData[new Date("2019-05-01")]["P80000722"];
+              vals1 = cData[new Date("2019-09-01")]["P60007168"];
+              vals2 = cData[new Date("2019-09-01")]["P00009621"];
+              vals3 = cData[new Date("2019-09-01")]["P80006117"];
+              vals4 = cData[new Date("2019-09-01")]["P00010298"];
+              vals5 = cData[new Date("2019-09-01")]["P80000722"];
               let valKeys = Object.keys(vals5);
               for (let i = 0; i < valKeys.length; i++) {
                 if (z2c[valKeys[i]] != null) {
@@ -179,7 +179,10 @@
                     candList.splice(candList.indexOf(max), 1);
                     let secondMax = Math.max(...candList);
                     let delta = max - secondMax;
-                    L.circle([lat, lng], {radius: delta, color: color}).addTo(mymap);
+                    let radius = delta;
+                    // let radius = 4000;
+                    // let radius = 10000 * Math.log(delta / 700 + 1);
+                    L.circle([lat, lng], {radius: radius, color: color}).addTo(mymap);
                   }
                 }
               }
