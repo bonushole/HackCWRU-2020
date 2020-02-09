@@ -2,6 +2,7 @@
 
 //var _ = require("lodash");
 
+var heatmap;
 
 function clone(objectToClone) {
     var cloned = JSON.parse(JSON.stringify(objectToClone));
@@ -27,6 +28,7 @@ var sampleDots = {loc:{lat: 41.850033, lng: -80.6500523}, size:1},
 */
 
 var templateMarker;
+var zipMarkers = {};
 
 var map;
 var allZipMarkers = {
@@ -84,6 +86,11 @@ function initMap() {
   },100);
   */
   
+  heatmap = new google.maps.visualization.HeatmapLayer({
+    data:[]
+  });
+  heatmap.setMap(map);
+  
    
   
   retrieveZips();
@@ -140,7 +147,7 @@ function updateDots(color, vals){
   console.log(color);
   console.log(vals);
   console.log(Object.keys(vals).length);
-  var zipMarkers = {};//allZipMarkers[color];
+  //allZipMarkers[color];
   for(var val in vals){
   
   
@@ -155,9 +162,23 @@ function updateDots(color, vals){
     }
     //console.log(val);
     if(zipMarkers.hasOwnProperty(val)){
-      zipMarkers[val].marker.setRadius(60000*vals[val]);
+      console.log("updating props");
+      zipMarkers[val].marker.weight = vals[val]*.1;
     }else{
+      var coords = getCoordsFromZip(val);
+      console.log(coords);
+      if(coords == undefined){
+        continue;
+      }
       
+      
+      var marker = {location:new google.maps.LatLng(coords['lat'], coords['lng']), weight: vals[val]*.1};
+      
+      heatmap.data.push(marker);
+      zipMarkers[val]={
+       marker: marker
+     };
+      /*
       var marker = templateMarker= new google.maps.Circle({
         strokeColor: '#FF0000',
         strokeOpacity: 0,
@@ -165,7 +186,7 @@ function updateDots(color, vals){
         fillColor: '#FF0000',
         fillOpacity: 0.05,
         center:getCoordsFromZip(val),
-        radius:60000,//10*vals[val],
+        radius:1000*vals[val],//10*vals[val],
         map: map
        });
       //marker.position = vals[val]["loc"]
@@ -173,6 +194,7 @@ function updateDots(color, vals){
      zipMarkers[val]={
        marker: marker
      };
+     */
     }
    
   }
