@@ -30,11 +30,11 @@ function plotMap(result, date, candidates, vis_type) {//vis_type = 1, standart, 
                 if (z2c[valKeys[i]] != null) {
                   let lat = z2c[valKeys[i]]["lat"];
                   let lng = z2c[valKeys[i]]["lng"];
-                  let a = vals1[valKeys[i]] * candidates[0];
-                  let b = vals2[valKeys[i]] * candidates[1];
-                  let c = vals3[valKeys[i]] * candidates[2];
-                  let d = vals4[valKeys[i]] * candidates[3];
-                  let e = vals5[valKeys[i]] * candidates[4];
+                  let a = vals1[valKeys[i]] * candidates['sanders'];
+                  let b = vals2[valKeys[i]] * candidates['warren'];
+                  let c = vals3[valKeys[i]] * candidates['rat'];
+                  let d = vals4[valKeys[i]] * candidates['biden'];
+                  let e = vals5[valKeys[i]] * candidates['klob'];
                   if (!a) {
                     a = 0;
                   }

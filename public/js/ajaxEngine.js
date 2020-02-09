@@ -10,7 +10,15 @@ var candidates = {
   "P80000722": "Biden"
 };
 
-var selectedCandidates=[];
+var selectedCandidates={
+
+  "sanders":false,
+  "warren":false,
+  "klob":false,
+  "rat":false,
+  "biden":false
+
+};
 
 var months = {};
 
@@ -138,8 +146,8 @@ function queryDate(date){
   }else{
     console.log(date)
     //updateDots('P60007168', cachedData[new Date(date)]["P60007168"])
-    candidates = [true, true, true, true];
-    plotMap(cachedData,date,candidates, 0);
+    //candidates = [true, true, true, true];
+    plotMap(cachedData,date,selectedCandidates, 0);
   
   }
   
@@ -200,6 +208,9 @@ console.log(range);
 
 slider.max=range;
 
+function getDateFromSlider(){
+  return getSendableDate(slider.value);
+}
 
 
 output.innerHTML = getReadableDate(slider.value);
@@ -224,20 +235,25 @@ function toggleCandidate(candidate){
   //console.log("clicking our big smooth boy");
   /*document.getElementById("demo").innerHTML = "Sanders";*/
   var wrappingDiv = document.getElementById(candidate);
-  if(selectedCandidates.includes(candidate)){
-    selectedCandidates.splice(selectedCandidates.indexOf(candidate),1);
+  if(selectedCandidates[candidate]){
+    //selectedCandidates.splice(selectedCandidates.indexOf(candidate),1);
     
     wrappingDiv.style.backgroundColor = "#000000";
+    
+    selectedCandidates[candidate] = false;
+    
   }else{
   
     
       console.log("changing the class");
       wrappingDiv.style.backgroundColor = "#013F85";
-      selectedCandidates.push(candidate);
+      //selectedCandidates.push(candidate);
+      
+      selectedCandidates[candidate] = true;
     
   }
-  
 
+  queryDate(getDateFromSlider());
 }
 
 
@@ -274,12 +290,12 @@ function amyKlobuchar() {
 console.log("Trying to retrieve everything...");
 $.ajax({
   type: "GET",
-  url: "http://localhost:5000/js/z2c.json",
+  url: "/js/z2c.json",
   success: function(result) {
     z2c = result;
     $.ajax({
       type: "GET",
-      url: "http://localhost:5000/api/donations/",
+      url: "/api/donations/",
       data: {
         monthRange: true,
         candidateRange: true,
