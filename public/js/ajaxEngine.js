@@ -67,6 +67,28 @@ function retrieveMonth(){
 	
 }
 
+
+function retrieveEverything(){
+	var xhttp = new XMLHttpRequest();
+	
+	var key = month;
+	
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		  console.log("got json");
+			var zips = JSON.parse(this.responseText);
+			console.log(zips);
+			months[key] = zips;
+			updateDots('P60007168',zips['P60007168'])
+			//initializeZipMarkers(zips);
+		}
+	};
+	xhttp.open("GET", "electi.online:8080/api/donations?monthRange=true&candidateRange=true", true);
+	xhttp.send();
+	
+}
+
+
 function queryDate(){
 
   if(zipsNCoords.hasOwnProperty(month)){

@@ -162,11 +162,11 @@ function updateDots(color, vals){
     }
     //console.log(val);
     if(zipMarkers.hasOwnProperty(val)){
-      console.log("updating props");
+      //console.log("updating props");
       zipMarkers[val].marker.weight = vals[val]*.1;
     }else{
       var coords = getCoordsFromZip(val);
-      console.log(coords);
+      //console.log(coords);
       if(coords == undefined){
         continue;
       }
