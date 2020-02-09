@@ -79,6 +79,7 @@ function retrieveEverything(){
 			candidateRange: true,
 		},
 		success: function(result) {
+		  console.log("result");
 			console.log(result);
 			cachedData = result;
 			console.log(cachedData[new Date("2018-10-01")]["P60007168"]);
@@ -112,8 +113,9 @@ function retrieveEverything(){
 }
 
 
-function queryDate(){
+function queryDate(date){
 
+/*
   if(zipsNCoords.hasOwnProperty(month)){
     updateDots(months[month]);
   }else{
@@ -121,6 +123,20 @@ function queryDate(){
     retrieveMonth();
   
   }
+  */
+  console.log("month");
+  console.log(month);
+  
+  if(cachedData==undefined){
+  
+    return;
+  
+  }else{
+    console.log(new Date(date))
+    updateDots('P60007168', cachedData[new Date(date)]["P60007168"])
+  
+  }
+  
 
 }
 
@@ -145,8 +161,8 @@ function getSendableDate(day){
   var strDate = tomorrow.getUTCFullYear() + "-" + (tomorrow.getUTCMonth()+1)+"-01";
   console.log("strdate");
   console.log(strDate);
-  //return strDate;
-  return "2019-08-01";
+  return strDate;
+  //return "2019-08-01";
 }
 
 var slider = document.getElementById("myRange");
@@ -170,7 +186,7 @@ slider.onmouseup = function() {
   if(getReadableDate(this.value) != month){
   
     month = getReadableDate(this.value);
-    queryDate();
+    queryDate(getSendableDate(this.value));
   
   }
   output.innerHTML = getReadableDate(this.value);
