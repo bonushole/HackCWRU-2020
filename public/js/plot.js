@@ -11,13 +11,17 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
 }).addTo(mymap);
 
+var circles = [];
 
 function plotMap(result, date, candidates, vis_type) {//vis_type = 1, standart, vis_type = 2, all same size, vis_type = 3, normalized (anti biden)
-              console.log("plotting");
-              console.log(result);
+              //console.log("plotting");
+              //console.log(result);
+              clearPlot();
               cData = result;
+              //console.log(new Date(date));
+              var string = "2019-09-01";
               vals1 = cData[new Date(date)]["P60007168"];
-              vals2 = cData[new Date(date)]["P00009621"]; 
+              vals2 = cData[new Date(date)]["P00009621"];
               vals3 = cData[new Date(date)]["P80006117"];
               vals4 = cData[new Date(date)]["P00010298"];
               vals5 = cData[new Date(date)]["P80000722"];
@@ -47,26 +51,43 @@ function plotMap(result, date, candidates, vis_type) {//vis_type = 1, standart, 
                     e = 0;
                   }
                   let candList = [a,b,c,d,e];
-                  console.log(candList);
+                  //console.log(candList);
                   let max = Math.max(...candList);
                   if (max > 0) {
                     let maxIndex = candList.indexOf(max);
-                    console.log("Winner: " + names[maxIndex]);
+                    //console.log("Winner: " + names[maxIndex]);
                     let color = colors[maxIndex];
                     candList.splice(candList.indexOf(max), 1);
                     let secondMax = Math.max(...candList);
                     let delta = max - secondMax;
+                    //console.log(delta);
+          var r;
 					if(vis_type == 0){
-						let r = delta;
+						r = delta;
 					}else if(vis_type == 1){
-						let r = 5000;
+						r = 5000;
 					}else{
-						let r = 5000 * Math.log(delta/3000 + 1);
+						r = 5000 * Math.log(delta/3000 + 1);
 					}
+					//console.log(r)
 	
-                    L.circle([lat, lng], {radius: r, color: color}).addTo(mymap);
+                    var circ = L.circle([lat, lng], {radius: r, color: color});
+                    circ.addTo(mymap)
+                    circles.push(circ);
                   }
                 }
               }
               // updateDots('P60007168', cachedData[new Date("2018-10-01")]["P60007168"]);
             }
+            
+            
+function clearPlot(){
+
+  for(circ in circles){
+  
+    circles[circ].remove();
+  
+  }
+  circles = [];
+
+}

@@ -138,7 +138,8 @@ function queryDate(date){
   }else{
     console.log(date)
     //updateDots('P60007168', cachedData[new Date(date)]["P60007168"])
-    plotMap(cachedData,date);
+    candidates = [true, true, true, true];
+    plotMap(cachedData,date,candidates, 0);
   
   }
   
@@ -158,12 +159,30 @@ function getReadableDate(day){
 
 }
 
+function lastDayOfMonth(month){
+
+  var longMonths = [1,3,5,7,8];
+  var shorMonths = [2,4,6]
+  
+  if(month == 2){
+    return 28;
+  }
+  
+  if(longMonths.includes(month)){
+    return 31;
+  
+  }
+  
+  return 30;
+
+}
+
 function getSendableDate(day){
 
   var tomorrow = new Date(startDate + (day*1000*60*60*24));
   //var fullString = tomorrow.toDateString()
   //var splitDate = fullString.split(" ");
-  var strDate = tomorrow.getUTCFullYear() + "-" + (tomorrow.getUTCMonth()+1)+"-01";
+  var strDate = tomorrow.getUTCFullYear() + "-" + ("0"+(tomorrow.getUTCMonth()+1)).slice(-2)+"-01";
   console.log("strdate");
   console.log(strDate);
   return strDate;
