@@ -1,6 +1,6 @@
 var startDate = Date.parse("October 1, 2018");
 var endDate = Date.parse("September 1, 2019");
-
+var cachedData;
 
 var candidates = {
   "P60007168": "Sanders",
@@ -69,22 +69,45 @@ function retrieveMonth(){
 
 
 function retrieveEverything(){
-	var xhttp = new XMLHttpRequest();
+	console.log("Trying to retrieve everything.");
+
+	$.ajax({
+		type: "GET",
+		url: "http://localhost:5000/api/donations/",
+		data: {
+			monthRange: true,
+			candidateRange: true,
+		},
+		success: function(result) {
+			console.log(result);
+			cachedData = result;
+			console.log(cachedData[new Date("2018-10-01")]["P60007168"]);
+			updateDots('P60007168', cachedData[new Date("2018-10-01")]["P60007168"]);
+		},
+	})
+
+	// var xhttp = new XMLHttpRequest();
 	
-	var key = month;
+	// var key = month;
 	
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-		  console.log("got json");
-			var zips = JSON.parse(this.responseText);
-			console.log(zips);
-			months[key] = zips;
-			updateDots('P60007168',zips['P60007168'])
-			//initializeZipMarkers(zips);
-		}
-	};
-	xhttp.open("GET", "electi.online:8080/api/donations?monthRange=true&candidateRange=true", true);
-	xhttp.send();
+	// xhttp.onreadystatechange = function() {
+	// 	if (this.readyState == 4 && this.status == 200) {
+	// 		console.log("got json for retrieving everything");
+	// 		let payload = JSON.parse(this.responseText);
+	// 		console.log(payload);
+	// 		cachedData = JSON.parse(this.responseText);
+	// 		console.log(cachedData);
+	// 		console.log(cachedData[new Date("2018-10-01")]["P60007168"]);
+	// 		// months[key] = zips;
+	// 		updateDots('P60007168', cachedData[new Date("2018-10-01")]["P60007168"]);
+	// 		// updateDots('P60007168',zips['P60007168'])
+	// 		//initializeZipMarkers(zips);
+	// 	} else {
+	// 		console.log("Retrieving everything failed.");
+	// 	}
+	// };
+	// xhttp.open("GET", "electi.online:8080/api/donations?monthRange=true&candidateRange=true", true);
+	// xhttp.send();
 	
 }
 
@@ -94,7 +117,7 @@ function queryDate(){
   if(zipsNCoords.hasOwnProperty(month)){
     updateDots(months[month]);
   }else{
-  
+
     retrieveMonth();
   
   }

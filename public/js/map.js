@@ -94,7 +94,8 @@ function initMap() {
    
   
   retrieveZips();
-  retrieveMonth();
+  retrieveEverything();
+  // retrieveMonth();
 }
 
 function changeDots(){
@@ -125,7 +126,7 @@ function initializeZipMarkers(zipsNCoords){
       var marker = new google.maps.Circle({
         strokeColor: '#FF0000',
         strokeOpacity: 0,
-        strokeWeight: 2,
+        strokeWeight: 10000,
         fillColor: '#FF0000',
         fillOpacity: 0.05,
         center:zipsNCoords[zip].loc,
@@ -147,15 +148,13 @@ function updateDots(color, vals){
   console.log(color);
   console.log(vals);
   console.log(Object.keys(vals).length);
+  let i = -1;
   //allZipMarkers[color];
   for(var val in vals){
-  
-  
-  /*
-    if(val[0]%70!=0){
+    i += 1;
+    if(i % 50 != 0){
       continue;
     }
-  */  
     if(!vals.hasOwnProperty(val)){
       continue;
       //zipMarkers[val].marker.setRadius(60000*val['Amount']);
@@ -163,7 +162,8 @@ function updateDots(color, vals){
     //console.log(val);
     if(zipMarkers.hasOwnProperty(val)){
       //console.log("updating props");
-      zipMarkers[val].marker.weight = vals[val]*.1;
+      // zipMarkers[val].marker.weight = vals[val]*.1;
+      zipMarkers[val].marker.weight = 10000000;
     }else{
       var coords = getCoordsFromZip(val);
       //console.log(coords);
