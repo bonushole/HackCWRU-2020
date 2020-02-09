@@ -7,12 +7,14 @@
 
     <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script type="text/javascript" src="../jsjson/particles.js"></script>
-    
+
+
+    <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet"
-      href='https://fonts.googleapis.com/css?family=Varela+Round|Open Sans'>
+      href='https://fonts.googleapis.com/css?family=Varela+Round|OpenSans'>
 
-    <title>Eagle Eye</title>
+    <title>Electi.online</title>
     <link rel="stylesheet" href="../css/style.css">
   </head>
 
@@ -20,60 +22,79 @@
     <header>
       <div class="container">
         <div id="branding">
-          <h1 class="animated slideInLeft delay- 2s" align="justified">Eagle Eye</h1>
+          <h1 class="animated slideInLeft delay- 2s" align="justified">Electi.online</h1>
         </div>
       </div>
     </header>
 
     <section id="showcase">
       <div class='container'>
-        <h2>The Bird's-Eye View to Campaign Finance</h2>
+        <h2>Campaign Finance: visualized</h2>
       </div>
     </section>
 
     <!--section id="experience"-->
       <div class="row">
         <h3>Select a candidate:</h3>
-          <div class="sanders">
-            <form class="column">
-              <input type="image" src="../img/Bernie-Sanders.png" alt="Sanders" width="80" height="80">
-              <p class="top">Bernie Sanders</p>
+          <br>
+          <div class="icon">
+            <form class="column" onclick="bernieSanders()">
+              <input type="image" src="../img/sanders.png" alt="Sanders" width="50" height="50">
+              <p>Bernie Sanders</p>
             </form>
           </div>
-          <div class="warren">
-            <form class="column">
-              <input type="image" src="../img/Elizabeth-Warren.png" alt="Warren" width="80" height="80">
+          <div class="icon">
+            <form class="column" onclick="elWarren()">>
+              <input type="image" src="../img/warren.png" alt="Warren" width="50" height="50">
               <p>Elizabeth Warren</p>
             </form>
           </div>
-          <div class="buttigieg">
-            <form class="column">
-              <input type="image" src="../img/Pete-Buttigieg.png" alt="Buttigieg" width="80" height="80">
+          <div class="icon">
+            <form class="column" onclick="peteButtigieg()">>
+              <input type="image" src="../img/buttigieg.png" alt="Buttigieg" width="50" height="50">
               <p>Pete Buttigieg</p>
             </form>
           </div>
-          <div class="biden">
-            <form class="column">
-              <input type="image" src="../img/Joe-Biden.png" alt="Biden" width="80" height="80">
+          <div class="icon">
+            <form class="column" onclick="joeBiden()">>
+              <input type="image" src="../img/biden.png" alt="Biden" width="50" height="50">
               <p>Joe Biden</p>
             </form>
           </div>
-          <div class="klobuchar">
-            <form class="column">
-              <input type="image" src="../img/Amy-Klobuchar.png" alt="Klobuchar" width="80" height="80">
+          <div class="icon">
+            <form class="column" onclick="amyKlobuchar()">>
+              <input type="image" src="../img/klobuchar.png" alt="Klobuchar" width="50" height="50">
               <p>Amy Klobuchar</p>
             </form>
           </div>
     <!--/section-->
-
 
     <div class="slidecontainer">
       <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
       <p>Day: <span id="demo"></span></p>
     </div>
 
-    <script src="../js/ajaxEngine.js">
+    <script src="../js/ajaxEngine.js"></script>
       
+    <script>
+      
+
+      function bernieSanders() {
+        /*document.getElementById("demo").innerHTML = "Sanders";*/
+      }
+      function elWarren() {
+        /*document.getElementById("demo").innerHTML = "Warren";*/
+      }
+      function peteButtigieg() {
+        /*document.getElementById("demo").innerHTML = "Buttigieg";*/
+      }
+      function joeBiden() {
+        /*document.getElementById("demo").innerHTML = "Biden";*/
+      }
+      function amyKlobuchar() {
+        /*document.getElementById("demo").innerHTML = "Klobuchar";*/
+      }
+
     </script>
 
     <!--
@@ -87,6 +108,9 @@
     <script src="../js/map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVS--25wxecQtTu2gvCVBdCvOcEfwvkiM&callback=initMap&libraries=visualization"
     async defer></script>
-
+    <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
   </body>
 </html>
