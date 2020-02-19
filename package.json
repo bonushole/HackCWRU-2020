@@ -23,7 +23,7 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "method-override": "^3.0.0",
-    "mongodb": "^3.5.2",
+    "mongodb": "^3.5.3",
     "morgan": "^1.9.1",
     "path": "^0.12.7"
   }
