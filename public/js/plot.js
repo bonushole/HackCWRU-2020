@@ -73,7 +73,7 @@ function plotMap(result, date, candidates, vis_type) {//vis_type = 1, standart, 
 	
                     var circ = L.circle([lat, lng], {radius: r, color: color});
                     circ.addTo(mymap)
-					circ.bindPopup("<b>"+"CANDIDATE NAME PLACEHOLDER"+"</b><br>$"+ delta);
+					circ.bindPopup("<b>"+names[maxIndex]+"</b><br>$"+ delta);
                     circles.push(circ);
                   }
                 }
