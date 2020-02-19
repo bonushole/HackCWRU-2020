@@ -65,7 +65,7 @@ function plotMap(result, date, candidates, vis_type) {//vis_type = 1, standart, 
 					if(vis_type == 0){
 						r = delta;
 					}else if(vis_type == 1){
-						r = 500;
+						r = 50;
 					}else{
 						r = 5000 * Math.log(delta/3000 + 1);
 					}
@@ -73,7 +73,7 @@ function plotMap(result, date, candidates, vis_type) {//vis_type = 1, standart, 
 	
                     var circ = L.circle([lat, lng], {radius: r, color: color});
                     circ.addTo(mymap)
-					circ.bindPopup("<b>"+names[maxIndex]+"</b><br>$"+ delta);
+					circ.bindPopup("Zip-"+ String(valKeys[i]) + "<br><b>Candidate-"+names[maxIndex]+"</b><br>Delta-$"+ delta);
                     circles.push(circ);
                   }
                 }
